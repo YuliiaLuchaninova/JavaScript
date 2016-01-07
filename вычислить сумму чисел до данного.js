@@ -23,7 +23,6 @@ function sumToRecursion(x){
     }
 }
 sumToRecursion(10); //->55
-
 //через сумму арифметической прогрессии, самый быстрый т.к сразу считает по формуле 1 раз
 
 function arProgression(k){

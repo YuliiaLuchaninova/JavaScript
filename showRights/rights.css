@@ -1,0 +1,23 @@
+body{
+    background-color: #363636;
+
+}
+h1,p,.role {
+    color:#6A6A6A;
+    }
+h1{
+    text-align: center;
+}
+.rights{
+    width:600px;
+    margin: 0 auto;
+    padding:10px 50px;
+}
+form {
+    width: 300px;
+    display: inline-block;
+    text-align: center;
+}
+.list{
+    color:white;
+}

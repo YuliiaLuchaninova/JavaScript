@@ -1,7 +1,7 @@
 /**
  * Created by Julia on 11.01.2016.
  */
-var DELETE = 1;// 001константы для хранения прав
+var DELETE = 1;// 001  константы для хранения прав
 var WRITE = 2;//010
 var READ = 4;//100
 var guest = READ;
@@ -16,7 +16,7 @@ var key = 1220461917; //произвольный ключ для шифрова�
 
 window.onload = function () {
     if (localStorage) {
-        var savedUser = JSON.parse(localStorage.getItem('user'));//т.к. объект хранился в localstorage в виде строки, возвращаем вид объекта
+        var savedUser = JSON.parse(localStorage.getItem('user'));//т.к. объект хранился в localStorage в виде строки, возвращаем вид объекта
         if (savedUser) {
             checkPassword(savedUser);//проверяем, есть ли уже сохраненныю юзер
         }
@@ -43,7 +43,7 @@ window.onload = function () {
                     secondPassword: secondPassword,
                     role: role
                 };
-                // записываем его в localstorage
+                // записываем его в localStorage
                 localStorage.setItem('user', JSON.stringify(user));
             });
         }
@@ -62,12 +62,11 @@ function cript(password, key) {
 
 function checkPassword(savedUser) {//проверка пароля
     var checkPass = cript(savedUser.secondPassword, key);
-    var criptedPass = savedUser.password;
     if (secondPassword == 0) {//если пользователь не ввел пароль
         alert('вы не ввели пароль');
     }
     else {
-        if (checkPass == criptedPass) {
+        if (checkPass == savedUser.password) {
             alert('вы верно ввели пароль');
             showRights(savedUser);//если пароли совпадают - показываем права
         }
@@ -78,7 +77,6 @@ function checkPassword(savedUser) {//проверка пароля
 }
 function showRights(savedUser) {//показываем права юзеру
     var list = document.getElementById('list');
-
     if ((accessRights[savedUser.role] & READ)) {
         appendEl('read');
     }

@@ -7,10 +7,10 @@ var READ = 4;//100
 var guest = READ;
 var moderator = guest | WRITE;
 var admin = moderator | DELETE;
-var accessRights={
-    guest : guest,
-    moderator : moderator,
-    admin : admin
+var accessRights = {
+    guest: guest,
+    moderator: moderator,
+    admin: admin
 };
 var key = 1220461917; //произвольный ключ для шифрования
 
@@ -75,24 +75,32 @@ function checkPassword(savedUser) {//проверка пароля
         }
     }
 }
+
+
 function showRights(savedUser) {//показываем права юзеру
     var list = document.getElementById('list');
-    var li = document.createElement('LI');
-    var check = DELETE | WRITE | READ;
-    if (( accessRights[savedUser.role] & check) == 4) {
-        li.innerHTML = 'Вы не можете' + ' ';
-        list.appendChild(li);
-    }
-    if ((accessRights[savedUser.role] & check) == 6) {
-        li.innerHTML = 'Вы можете' + ' ';
-        list.appendChild(li);//добавляем элемент в список
-    }
-    if ((accessRights[savedUser.role]& check) == 7) {
-        li.innerHTML = 'Вы можете' + ' ';
-        list.appendChild(li);//добавляем элемент в список
-    }
 
+    if ((accessRights[savedUser.role] & READ)) {
+        appendEl('read');
+    }
+    if ((accessRights[savedUser.role] & WRITE)) {
+        appendEl('write');
+    }
+    if ((accessRights[savedUser.role] & DELETE)) {
+        appendEl('delete');
+    }
 }
+function appendEl(word) {
+    var can = 'You can ';
+    var li = document.createElement('LI');
+    li.innerHTML = can + word;
+    list.appendChild(li);
+}
+
+
+
+
+
 
 
 

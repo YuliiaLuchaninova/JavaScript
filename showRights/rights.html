@@ -7,7 +7,7 @@
     <script src="rights.js"></script>
 </head>
 <body>
-<h1> Введите свой логин и пароль</h1>
+<h1 class = 'header'> Введите свой логин и пароль</h1>
 <div class="rights">
     <form id='form'>
 
@@ -19,6 +19,11 @@
         <div>
             <label for="password">Пароль</label>
             <input type="password" name="password" class="form-control" placeholder="Password" id="password">
+        </div>
+
+        <div>
+            <label for="password">Повторите пароль</label>
+            <input type="password" name="password" class="form-control" placeholder="Password" id="secondPassword">
         </div>
 
         <div class="role">
@@ -36,7 +41,6 @@
     </form>
     <ul id="list" class="list">
         <li> Ваши права:</li>
-
 
 
     </ul>

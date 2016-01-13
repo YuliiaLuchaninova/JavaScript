@@ -24,6 +24,7 @@ window.onload = function () {
             document.getElementById('form').addEventListener('submit', function () {
                 var login = document.getElementById('login').value;//сохр в значения переменных данные, введенные в форму
                 var password = document.getElementById('password').value;
+                var secondPassword = document.getElementById('secondPassword').value;
                 //var role = this.elements.role.value;
                 var roles = document.getElementsByName('role');
                 for (var i = 0; i < roles.length; i++) {
@@ -40,6 +41,7 @@ window.onload = function () {
                 var user = {//создаем юзера
                     login: login,
                     password: criptedPassword,
+                    secondPassword: secondPassword,
                     role: role
                 };
                 // записываем его в localstorage
@@ -60,13 +62,13 @@ function cript(password, key) {
 }
 
 function checkPassword(savedUser) {//проверка пароля
-    var checkPass = cript(prompt('введите свой пароль еще раз', ''), key);
-    var uncriptedPass = (cript(savedUser.password, key) ^ key);
-    if (checkPass == key) {//если пользователь не ввел пароль
+    var checkPass = cript(savedUser.secondPassword, key);
+    var criptedPass = savedUser.password;
+    if (secondPassword == 0) {//если пользователь не ввел пароль
         alert('вы не ввели пароль');
     }
     else {
-        if (checkPass == uncriptedPass) {
+        if (checkPass == criptedPass) {
             alert('вы верно ввели пароль');
             showRights(savedUser);//если пароли совпадают - показываем права
         }

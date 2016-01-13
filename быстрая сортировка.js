@@ -3,12 +3,12 @@
  */
 var array = [1, 3, 5, 2, 56, 10, 0];
 
-function sort(array, left, right) {
+function sort(array, left, right) {//в самый перв.запуск ф. left и right -undefined, ниже присваиваем им значения
     var n = array.length;
-    var l = left = left || 0;
+    var l = left = left || 0;//присв.знач, если в left || 0 не задан или null,  то запис. в него знач 0, которое зап. в l
     var r = right = right || n - 1;
     var j = (left + right) / 2;
-    var b = array[j.toFixed()];
+    var b = array[j.toFixed()];//округляем - задаем точку разделяющую наш массив
 
     if (n <= 1) return array;
 

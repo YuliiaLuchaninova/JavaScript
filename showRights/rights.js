@@ -25,7 +25,6 @@ window.onload = function () {
                 var login = document.getElementById('login').value;//сохр в значения переменных данные, введенные в форму
                 var password = document.getElementById('password').value;
                 var secondPassword = document.getElementById('secondPassword').value;
-                //var role = this.elements.role.value;
                 var roles = document.getElementsByName('role');
                 for (var i = 0; i < roles.length; i++) {
                     if (roles[i].checked) {
@@ -77,8 +76,6 @@ function checkPassword(savedUser) {//проверка пароля
         }
     }
 }
-
-
 function showRights(savedUser) {//показываем права юзеру
     var list = document.getElementById('list');
 
@@ -92,7 +89,7 @@ function showRights(savedUser) {//показываем права юзеру
         appendEl('delete');
     }
 }
-function appendEl(word) {
+function appendEl(word) {//чтобы не повторять в каждом if showRights создание эл-та списка , если создать в showRights 1 раз то будет перезаписываться а не дописываться
     var can = 'You can ';
     var li = document.createElement('LI');
     li.innerHTML = can + word;

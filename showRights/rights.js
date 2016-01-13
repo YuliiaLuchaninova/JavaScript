@@ -62,7 +62,7 @@ function cript(password, key) {
 
 function checkPassword(savedUser) {//проверка пароля
     var checkPass = cript(savedUser.secondPassword, key);
-    if (secondPassword == 0) {//если пользователь не ввел пароль
+    if (savedUser.secondPassword == 0) {//если пользователь не ввел пароль
         alert('вы не ввели пароль');
     }
     else {

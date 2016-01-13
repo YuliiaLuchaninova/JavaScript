@@ -10,38 +10,40 @@
 <h1 class='header'> Введите свой логин и пароль</h1>
 <div class="rights">
     <form id='form'>
-
         <div>
-            <label for="login"></label> Логин
-            <input type="text" name="login" class="form-control" placeholder="Login" id="login">
+            <p class="user-label"><label for="login">Логин</label></p>
+            <input type="text" placeholder="Login" id="login">
         </div>
 
         <div>
-            <label for="password">Пароль</label>
-            <input type="password" name="password" class="form-control" placeholder="Password" id="password">
+            <p class="user-label"><label for="password" class="label">Пароль</label></p>
+            <input type="password" placeholder="Password" id="password">
         </div>
 
         <div>
-            <label for="password">Повторите пароль</label>
-            <input type="password" name="password" class="form-control" placeholder="Password" id="secondPassword">
+            <p class="user-label"><label for="password" class="label">Повторите пароль</label></p>
+            <input type="password" placeholder="Confirm password" id="secondPassword">
         </div>
 
         <div class="role">
             <p>Роль</p>
-            <br>
-            <label> <input type="radio" name="role" value="admin">Администратор</label>
-            <br>
-            <label> <input type="radio" name="role" value="moderator">Модератор</label>
-            <br>
-            <label> <input type="radio" name="role" value="guest">Гость</label>
-        </div>
 
+            <label class="role-label"> <input type="radio" name="role" value="admin">Администратор</label>
+            <br>
+            <label class="role-label"> <input type="radio" name="role" value="moderator">Модератор</label>
+            <br>
+            <label class="role-label"> <input type="radio" name="role" value="guest">Гость</label>
+
+        </div>
         <div>
-            <input type="submit" value="Показать права" class="submit form-control showrights"></div>
+            <input type="submit" value="Показать права" class="show-rights">
+        </div>
     </form>
-    <ul id="list" class="list">
-        <li> Ваши права:</li>
-    </ul>
+    <div class="rights-list">
+        <p> Ваши права:</p>
+        <ul id="list" class="list">
+        </ul>
+    </div>
 </div>
 </body>
 </html>

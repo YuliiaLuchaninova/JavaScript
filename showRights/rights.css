@@ -1,23 +1,27 @@
-body{
-    background-color: #363636;
+body {
+    background-color: #4A4A4A;
+}
+.role {
+    color: #bbbbbb;
+    font-size: 20px;
+}
+.user-label {
+    font-size: 20px;
+    margin: 10px auto 0;
+}
+.rights {
+    margin: 0;
+    padding: 10px 50px;
+}
+.show-rights{
+    border-radius: 5px;
+    background-color: #00FFFF;
+    line-height: 30px;
+}
+.rights-list > p,.header, .list, .user-label {
+    color:#FFFFFF;
+}
+.list  > li{
+    color:#33C60E;
+}
 
-}
-h1,p,.role {
-    color:#6A6A6A;
-    }
-h1{
-    text-align: center;
-}
-.rights{
-    width:600px;
-    margin: 0 auto;
-    padding:10px 50px;
-}
-form {
-    width: 300px;
-    display: inline-block;
-    text-align: center;
-}
-.list{
-    color:white;
-}

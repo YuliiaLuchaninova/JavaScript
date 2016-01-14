@@ -26,14 +26,23 @@ window.onload = function () {
                 var password = document.getElementById('password').value;
                 var secondPassword = document.getElementById('secondPassword').value;
                 var roles = document.getElementsByName('role');
-                for (var i = 0; i < roles.length; i++) {
-                    if (roles[i].checked) {
-                        var role = (roles[i].value);
-                    }
+                var role = getCheckedBtn(roles);
+                if(login == ''){
+                    alert("вы не ввели логин");
+                    return;
                 }
-                if (login == '' || password == '' || role == '') {//проверяем все ли строки заполнены
-                    alert('вы не все ввели');
-                    return;//для того чтобы функция дальше не выполнялась
+                if(password == ''){
+                    alert('вы не ввели пароль');
+                    return;
+                }
+                if(secondPassword ==''){
+                    alert('вы не ввели пароль еще раз');
+                    return;
+
+                }
+                if(!role){
+                    alert('вы не указали роль');
+                    return;
                 }
 
                 var criptedPassword = cript(password, key);//вызываем ф. шифрования пароля
@@ -50,22 +59,25 @@ window.onload = function () {
     }
 };
 
+function getCheckedBtn(roles) {
+    for (var i = 0; i < roles.length; i++) {
+        if (roles[i].checked) {
+            return roles[i].value;
+        }
+    }
+}
+
 function cript(password, key) {
     if (typeof (password) == "string") {
-        return (password.charCodeAt(password.length - 1)) ^ key;
+        password = (password.charCodeAt(password.length - 1));
 
     }
-    else {
         return password ^ key
-    }
 }
 
 function checkPassword(savedUser) {//проверка пароля
     var checkPass = cript(savedUser.secondPassword, key);
-    if (savedUser.secondPassword == 0) {//если пользователь не ввел пароль
-        alert('вы не ввели пароль');
-    }
-    else {
+    if (savedUser.secondPassword != 0) {
         if (checkPass == savedUser.password) {
             alert('вы верно ввели пароль');
             showRights(savedUser);//если пароли совпадают - показываем права
@@ -74,26 +86,52 @@ function checkPassword(savedUser) {//проверка пароля
             alert('вы неверно ввели пароль')
         }
     }
+    else {
+        alert('вы не ввели пароль');
+    }
 }
+
+
+
+//function showRights(savedUser) {//показываем права юзеру
+//    if ((accessRights[savedUser.role] & READ)) {
+//        appendEl('read');
+//    }
+//    if ((accessRights[savedUser.role] & WRITE)) {
+//        appendEl('write');
+//    }
+//    if ((accessRights[savedUser.role] & DELETE)) {
+//        appendEl('delete');
+//    }
+//}
 function showRights(savedUser) {//показываем права юзеру
-    var list = document.getElementById('list');
-    if ((accessRights[savedUser.role] & READ)) {
-        appendEl('read');
-    }
-    if ((accessRights[savedUser.role] & WRITE)) {
-        appendEl('write');
-    }
-    if ((accessRights[savedUser.role] & DELETE)) {
-        appendEl('delete');
+    switch (savedUser.role) {
+        case 'guest':
+            appendEl('read');
+            break;
+
+        case 'moderator':
+            appendEl('read, write');
+            break;
+
+        case 'admin':
+            appendEl('read, write, delete');
+            break;
+
+        default:
+            appendEl('nothing');
+            break;
     }
 }
+
 function appendEl(word) {//чтобы не повторять в каждом if showRights создание эл-та списка , если создать в showRights 1 раз то будет перезаписываться а не дописываться
+    var list = document.getElementById('list');
     var can = 'You can ';
     var li = document.createElement('LI');
     li.innerHTML = can + word;
     list.appendChild(li);
 }
-
+console.log(accessRights.admin & READ);
 
 
 

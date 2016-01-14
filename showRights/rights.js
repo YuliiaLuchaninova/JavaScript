@@ -77,18 +77,18 @@ function cript(password, key) {
 
 function checkPassword(savedUser) {//проверка пароля
     var checkPass = cript(savedUser.secondPassword, key);
-    if (savedUser.secondPassword != 0) {
-        if (checkPass == savedUser.password) {
-            alert('вы верно ввели пароль');
-            showRights(savedUser);//если пароли совпадают - показываем права
-        }
-        else {
-            alert('вы неверно ввели пароль')
-        }
-    }
-    else {
+
+    if (savedUser.secondPassword == 0) {//если пользователь не ввел пароль
         alert('вы не ввели пароль');
+        return false;
     }
+    if (checkPass !== savedUser.password) {
+        alert('вы неверно ввели пароль');
+        return false;
+    }
+
+    alert('вы верно ввели пароль');
+    showRights(savedUser);//если пароли совпадают - показываем права
 }
 
 

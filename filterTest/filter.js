@@ -6,21 +6,15 @@ function myFilter(arr, func) {
         var result = [];
         for (var i = 0; i < arr.length; i++) {
             if (i in arr) {
-
                 var someParam = arr[i];
                 if (func(someParam)) {
-                    if (typeof someParam === 'undefined') {
-                        result.push(someParam);
-                        continue;
-                    }
-                    if (typeof someParam === 'object' && someParam == null) {
-                        result.push(someParam);
-                        continue;
-                    }
                     result.push(someParam)
                 }
             }
         }
+    }
+    else{
+        alert("you haven't enter a callback function ");
     }
         return result;
 }

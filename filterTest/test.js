@@ -1,109 +1,98 @@
-/**
- * Created by Julia on 19.01.2016.
- */
+var testGenerator = {
+    inputArray: [4, 2, 15, [1, 1, 5], 0, 4, 15, 15, 15, 15, 'синий', 'сиНий', 'красный', , 'желтый', 'синий', 'Желтый', true, null, false, undefined, '', , null],
 
-describe('myFilter', function () {
-    var arr = [4, 2, 15,[1,1,5],0, 4, 15, 15, 15, 15, 'синий', 'сиНий', 'красный', , 'желтый', 'синий', 'Желтый', true, null, false, undefined, '', , null];
-    describe('фильтрует по числовому значению', function () {
-        function makeTest(i, expected) {
-            it('фильтрует по ' + i + ' результат: ' + expected, function () {
-                assert.deepEqual(myFilter(arr, function (a) {
-                    return a == i;
-                }), expected)
-            })
-        }
-        makeTest(2, [2]);
-        makeTest(4, [4, 4]);
-        makeTest(15, [15, 15, 15, 15, 15]);
-        makeTest(16, []);
-    });
+    testArray: [2, 4, 15, 16, 0, 'желтый', 'Желтый', 'синий', 'кра', true, false, []],
 
-    describe('фильтрует по строкам', function () {
-        function makeTest(str, expected) {
-            it('фильтрует по ' + str + ' результат: ' + expected, function () {
-                assert.deepEqual(myFilter(arr, function (a) {
-                    return a == str;
-                }), expected)
-            })
-        }
-        makeTest('желтый', ['желтый']);
-        makeTest('Желтый', ['Желтый']);
-        makeTest('синий', ['синий', 'синий']);
-        makeTest('кра', []);
-    });
+    comparingLogic: function (a, filterCondition) {
+        return a == filterCondition;
+    },
 
-    describe('фильтрует по нулевому значению', function () {
-        function makeTest(i, expected) {
-            it('фильтрует по ' + i + ' результат: ' + expected, function () {
-                assert.deepEqual(myFilter(arr, function (a) {
-                    return a == i;
-                }), expected)
-            })
-        }
-        var expectedAfterNativeFilter = arr.filter(function (a) {
-            return a == null;
+    makeTest: function (i, expected) {
+        it('filters by ' + typeof i + ' ' + '"' + i + '"' + ' and result is : ' + expected, function () {
+            assert.deepEqual(myFilter(testGenerator.inputArray, function (a) {
+                return testGenerator.comparingLogic(a, i);
+            }), expected)
+        })
+    },
+
+    singleCompare: function (filterCondition) {
+        var expectedAfterNativeFilter = testGenerator.inputArray.filter(function (a) {
+            return testGenerator.comparingLogic(a, filterCondition);
         });
-        makeTest(null, expectedAfterNativeFilter);
+        testGenerator.makeTest(filterCondition, expectedAfterNativeFilter);
+    },
 
-        expectedAfterNativeFilter = arr.filter(function (a) {//по числу 0
-            return a == 0;
-        });
-        makeTest(0, expectedAfterNativeFilter);
-    });
-
-    describe('фильтрует по значению undefined', function () {
-        function makeTest(i, expected) {
-            it('фильтрует по ' + i + ' результат: ' + expected, function () {
-                assert.deepEqual(myFilter(arr, function (a) {
-                    return a == i;
-                }), expected)
-            })
+    multiCompare: function () {
+        for (var k = 0; k < testGenerator.testArray.length; k++) {
+            this.singleCompare(testGenerator.testArray[k]);
         }
-        var expectedAfterNativeFilter = arr.filter(function (a) {
-            return a == undefined;
-        });
-        makeTest(undefined, expectedAfterNativeFilter);
-    });
+    },
 
-    describe('фильтрует по значению true', function () {
-        function makeTest(i, expected) {
-            it('фильтрует по ' + i + ' результат: ' + expected, function () {
-                assert.deepEqual(myFilter(arr, function (a) {
-                    return a == i;
-                }), expected)
-            })
-        }
-        var expectedAfterNativeFilter = arr.filter(function (a) {
-            return a == true;
-        });
-        makeTest(true, expectedAfterNativeFilter);
-    });
+    makeDescribeBlock: function (name, filterCondition, doMultiCompare) {
+        describe(name + ' ' + filterCondition, function () {
+            if (!doMultiCompare) {
+                testGenerator.singleCompare(filterCondition);
+            } else {
+                testGenerator.multiCompare()
+            }
+        })
+    }
+};
 
-    describe('фильтрует по значению false', function () {
-        function makeTest(i, expected) {
-            it('фильтрует по ' + i + ' результат: ' + expected, function () {
-                assert.deepEqual(myFilter(arr, function (a) {
-                    return a == i;
-                }), expected)
-            })
-        }
-        var expectedAfterNativeFilter = arr.filter(function (a) {
-            return a == false;
-        });
-        makeTest(false, expectedAfterNativeFilter);
-    });
+testGenerator.makeDescribeBlock('filters by different value', '', 1);
+testGenerator.makeDescribeBlock('filters by', null);
+testGenerator.makeDescribeBlock('filters by', undefined);
+testGenerator.makeDescribeBlock('filters by', 6 + 2 * 4 + 4 + 3 - 1);
 
-    describe('фильтрует по массиву', function () {
-        function makeTest(i, expected) {
-            it('фильтрует по ' + i + ' результат: ' + expected, function () {//результат - пустой массив
-                assert.deepEqual(myFilter(arr, function (a) {
-                    return a === i;
-                }), expected)
-            })
-        }
-        var expectedAfterNativeFilter = arr.filter(function (a) {
-            return a === [1,1,5];
-        });
-        makeTest([1,1,5], expectedAfterNativeFilter);
-    });
-});
+
+/*describe('myFilter', function () {
+ var arr = [4, 2, 15, [1, 1, 5], 0, 4, 15, 15, 15, 15, 'синий', 'сиНий', 'красный', , 'желтый', 'синий', 'Желтый', true, null, false, undefined, '', , null];
+ describe('filters by different value', function () {
+ function makeTest(i, expected) {
+ it('filters by ' + typeof i + ' ' + '"' + i + '"' + ' and result is : ' + expected, function () {
+ assert.deepEqual(myFilter(arr, function (a) {
+ return a == i;
+ }), expected)
+ })
+ }
+
+ var testArray = [2, 4, 15, 16, 0, 'желтый', 'Желтый', 'синий', 'кра', true, false, []];
+ for (var k = 0; k < testArray.length; k++) {
+ var expectedAfterNativeFilter = arr.filter(function (a) {
+ return a == testArray[k];
+ });
+ makeTest(testArray[k], expectedAfterNativeFilter);
+ }
+ });
+
+ describe('filters by null', function () {
+ function makeTest(i, expected) {
+ it('filters by ' + ' ' + '"' + i + '"' + ' and result is : ' + expected, function () {
+ assert.deepEqual(myFilter(arr, function (a) {
+ return a == i;
+ }), expected)
+ })
+ }
+
+ var expectedAfterNativeFilter = arr.filter(function (a) {
+ return a == null;
+ });
+ makeTest(null, expectedAfterNativeFilter);
+
+ });
+
+ describe('filters by undefined', function () {
+ function makeTest(i, expected) {
+ it('filters by ' + ' ' + '"' + i + '"' + ' and result is : ' + expected, function () {
+ assert.deepEqual(myFilter(arr, function (a) {
+ return a == i;
+ }), expected)
+ })
+ }
+
+ var expectedAfterNativeFilter = arr.filter(function (a) {
+ return a == undefined;
+ });
+ makeTest(undefined, expectedAfterNativeFilter);
+ });
+ });*/

@@ -3,16 +3,19 @@
  */
 var testGenerator = {
     inputArray: [4, 2, 15, [1, 1, 5], 0, 4, 15, 15, 15, 15, 'синий', 'сиНий', 'красный', , 'желтый', 'синий', 'Желтый', true, null, false, undefined, '', , null],
-    makeExpected: function () {
-        return testGenerator.inputArray.join();
+    sepArray: ['---', 'hgf', '123', ',03', '', , undefined,0, null, [1,3], x = {a:9, v:0}],
+    makeExpected: function (i) {
+        return testGenerator.inputArray.join(i);
     },
-    makeTest: function (expected) {
+    makeTest: function (expected,  i) {
         it('joins and result is : ' + expected, function () {
-            assert.equal(myJoin(testGenerator.inputArray), expected)
+            assert.equal(myJoin(testGenerator.inputArray, i), expected);
         })
     },
     makeDescribe: function () {
-        testGenerator.makeTest(testGenerator.makeExpected());
+        for(var i = 0; i < testGenerator.sepArray.length;i++ ) {
+            testGenerator.makeTest(testGenerator.makeExpected(testGenerator.sepArray[i]),testGenerator.sepArray[i]);
+        }
     }
 
 };

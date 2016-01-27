@@ -1,18 +1,17 @@
 var testGenerator = {
     inputArray: [2, 4, null, 0, , 1, '', -6, undefined, [1, 4]],
-    multuplyFunc: function (a) {
-        return a * 4;
-    },
-    subtractFunc: function (a) {
-        return a - 2;
-    },
-    denyFunc: function (a) {
-        return !a;
-    },
-    noFunc: function (a) {
-    },
-    testFuncArr: function () {
-        return [testGenerator.multuplyFunc, testGenerator.subtractFunc, testGenerator.denyFunc, testGenerator.noFunc];
+    funcLibrary : {
+        multuplyFunc:function (a) {
+            return a * 4;
+        },
+        subtractFunc:function (a) {
+            return a - 2;
+        },
+        denyFunc:function (a) {
+            return !a;
+        },
+        noFunc: function (a) {
+        }
     },
     getExpected: function (mapCallback) {
         return testGenerator.inputArray.map(mapCallback)
@@ -23,20 +22,20 @@ var testGenerator = {
         })
     },
     makeDescribeBlock: function (name) {
-        var arrayFunc = testGenerator.testFuncArr();
+        var arrayFunc = Object.keys(testGenerator.funcLibrary);
         for (var i = 0; i < arrayFunc.length; i++) {
             if (name == arrayFunc[i]) {
                 describe('changes input array by ' + arrayFunc[i], function () {
-                    testGenerator.makeTest(testGenerator.getExpected(arrayFunc[i]), arrayFunc[i]);
+                    testGenerator.makeTest(testGenerator.getExpected(testGenerator.funcLibrary[arrayFunc[i]]), testGenerator.funcLibrary[arrayFunc[i]]);
                 })
             }
         }
     }
 };
-testGenerator.makeDescribeBlock(testGenerator.multuplyFunc);
-testGenerator.makeDescribeBlock(testGenerator.subtractFunc);
-testGenerator.makeDescribeBlock(testGenerator.denyFunc);
-testGenerator.makeDescribeBlock(testGenerator.noFunc);
+testGenerator.makeDescribeBlock('multuplyFunc');
+testGenerator.makeDescribeBlock('subtractFunc');
+testGenerator.makeDescribeBlock('denyFunc');
+testGenerator.makeDescribeBlock('noFunc');
 
 
 

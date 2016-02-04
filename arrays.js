@@ -61,7 +61,6 @@ function filterRange(arr, a, b){
 //Решето Эратосфена
 function findPrime(n) {
     var arr = [];
-    var resArr = [];
     var j = 2;
     var p = 2;
     var sum = 0;
@@ -75,18 +74,15 @@ function findPrime(n) {
         for (var i = 0; i < arr.length; i++) {
             if (arr[i] != p) {
                 if (arr[i] % p === 0) {
-                    delete arr[i];
+                    arr.splice(i,1);
                 }
             }
         }
         p++;
     }
     for (var c = 0; c < arr.length; c++) {
-        if (arr[c]) {
-            resArr.push(arr[c]);
             sum += arr[c];
 
-        }
     }
     return sum;
 }

@@ -148,3 +148,26 @@ function unique(arr) {
     }
     return Object.keys(obj);
 }
+
+//перебирающие методы
+//Перепишите цикл через map
+var arr = ["Есть", "жизнь", "на", "Марсе"];
+var arrLength = [];
+arrLength = arr.map(function(item){
+    return item.length;
+});
+alert( arrLength );
+
+//Массив частичных сумм
+var arr = [1,2,3,4,5];
+function getSums(arr){
+    var result = [];
+    if(arr.length) {
+        var lastSum = arr.reduce(function (sum, current) {
+            result.push(sum);
+            return sum + current;
+        });
+        result.push(lastSum)
+    }
+    return  result;
+}

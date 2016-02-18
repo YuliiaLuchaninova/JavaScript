@@ -78,8 +78,10 @@ reverseSortManual(arr);
 //Добавление элемента в начало списка
 function addElementManual(arr, elem1, elem2) {
     var addArr = [];
+    var length = addArr.length;
     for (var i = 1; i < arguments.length; i++) {
-        addArr.push(arguments[i]);
+        length ++;
+        addArr[length -1] = arguments[i];
     }
     for (var k = 0; k < arr.length; k++) {
         addArr[addArr.length] = arr[k];
@@ -95,8 +97,10 @@ addElementManual(arr, 1, 2,2,5);
 //добавление элемента в конец списка
 function addElementLikePush(arr, elem1,elem2){
     var addArr = [];
+    var length = addArr.length;
     for (var i = 1; i < arguments.length; i++){
-        addArr.push(arguments[i]);
+        length ++;
+        addArr[length -1] = arguments[i];
     }
     for(var k = 0; k < addArr.length; k++){
         arr[arr.length] = addArr[k];
@@ -147,10 +151,18 @@ var arr = [1,2,4,4,5,6,7,2,3,2];
 deleteFilter(arr, 2);
 
 //Определение количества элементов списка
-function getNumOfElem(arr){
+//function getNumOfElem(arr){
+//    var counter = 0;
+//    for(i in arr){
+//        counter++;
+//    }
+//    return counter;
+//}
+function printElem(list) {
     var counter = 0;
-    for(i in arr){
+    while (list) {
         counter++;
+        list = list.next;
     }
-    return counter;
+    console.log(counter)
 }
